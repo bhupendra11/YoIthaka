@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Define the labels
         labels = new ArrayList<>();
-
+        
         for(int i=0; i<thailandTrends.size(); i++){
             Trend currentTrend = thailandTrends.get(i);
             entries.add(new BubbleEntry(i,currentTrend.getCount(),currentTrend.getCount()));
