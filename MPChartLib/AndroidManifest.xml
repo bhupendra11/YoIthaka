@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.github.mikephil.charting">
+<manifest package="com.github.mikephil.charting"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<!-- <uses-sdk
+ tools:overrideLibrary="io.realm"
+ tools:overrideLibrary="com.getkeepsafe.relinker"/>-->
 
  <!--  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
