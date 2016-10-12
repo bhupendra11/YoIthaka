@@ -177,8 +177,13 @@ public class BubbleChartRenderer extends DataRenderer {
 
                     BubbleEntry entry = dataSet.getEntryForIndex(j / 2 + minx);
 
-                    drawValue(c, dataSet.getValueFormatter(), entry.getSize(), entry, i, x,
+                   /* drawValue(c, dataSet.getValueFormatter(), entry.getSize(), entry, i, x,
                             y + (0.5f * lineHeight), valueTextColor);
+*/
+                    drawValueWithTitle(c, dataSet.getValueFormatter(), entry.getSize(), entry, i, x,
+                            y + (0.5f * lineHeight), valueTextColor);
+
+
                 }
             }
         }

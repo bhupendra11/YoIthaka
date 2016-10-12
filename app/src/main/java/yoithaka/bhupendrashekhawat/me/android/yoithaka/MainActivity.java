@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         
         for(int i=0; i<thailandTrends.size(); i++){
             Trend currentTrend = thailandTrends.get(i);
-            entries.add(new BubbleEntry(i,currentTrend.getCount(),currentTrend.getCount()));
+            entries.add(new BubbleEntry(i,currentTrend.getCount(),currentTrend.getCount(), currentTrend.getType()));
             labels.add(currentTrend.getType());
         }
 
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Add a set of colors to chart
         dataset.setColors(ColorTemplate.COLORFUL_COLORS);
-        dataset.setValueTextColor(Color.WHITE);
+        dataset.setValueTextColor(Color.BLACK);
         dataset.setValueTextSize(8);
         dataset.setLabel("Trend count");
 
