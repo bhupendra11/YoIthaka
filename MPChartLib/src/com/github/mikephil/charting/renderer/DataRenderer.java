@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
+import android.util.Log;
 
 import com.github.mikephil.charting.animation.ChartAnimator;
 import com.github.mikephil.charting.data.Entry;
@@ -145,10 +146,38 @@ public abstract class DataRenderer extends Renderer {
 
     }
 
-    public void drawValueWithTitle(Canvas c, ValueFormatter formatter, float value, Entry entry, int dataSetIndex, float x, float y, int color) {
+   /* public void drawValueWithTitle(Canvas c, ValueFormatter formatter, float circleRadius ,float value, Entry entry, int dataSetIndex, float x, float y, int color) {
         mValuePaint.setColor(color);
+        //draw value
         c.drawText(formatter.getFormattedValue(value, entry, dataSetIndex, mViewPortHandler), x, y, mValuePaint);
+        //draw title
+
         c.drawText(entry.getData().toString(),x, y -30, mValuePaint);
+
+        //draw only when textSize < (3/2)*radius of circle
+
+
+    }*/
+
+    public void drawValueForBubble(Canvas c, ValueFormatter formatter, float circleRadius ,float value, Entry entry, int dataSetIndex, float x, float y, int color) {
+        mValuePaint.setColor(color);
+        //draw value
+        c.drawText(formatter.getFormattedValue(value, entry, dataSetIndex, mViewPortHandler), x, y, mValuePaint);
+
+        //get the size of the text to be drawn
+        float titleTextSize = mValuePaint.measureText(entry.getData().toString());
+
+        /*Log.d("MPChart", "Radius = "+circleRadius +"   titleTextSize =  "+titleTextSize);*/
+
+        //draw title only when textSize < (2.8)*radius of circle
+        if(titleTextSize < (2.8)*circleRadius){
+            //draw title
+            c.drawText(entry.getData().toString(),x, y -30, mValuePaint);
+        }
+
+
+
+
     }
 
     /**

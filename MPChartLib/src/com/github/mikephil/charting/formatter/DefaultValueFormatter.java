@@ -41,6 +41,10 @@ public class DefaultValueFormatter implements ValueFormatter {
         // put more logic here ...
         // avoid memory allocations here (for performance reasons)
 
+
+
         return mFormat.format(value);
     }
+
+
 }

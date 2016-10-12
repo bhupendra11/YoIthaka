@@ -4,14 +4,12 @@ package com.github.mikephil.charting.renderer;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint.Style;
-
 import com.github.mikephil.charting.animation.ChartAnimator;
 import com.github.mikephil.charting.data.BubbleData;
 import com.github.mikephil.charting.data.BubbleEntry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.dataprovider.BubbleDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.IBubbleDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.Transformer;
 import com.github.mikephil.charting.utils.Utils;
 import com.github.mikephil.charting.utils.ViewPortHandler;
@@ -25,6 +23,15 @@ import java.util.List;
 public class BubbleChartRenderer extends DataRenderer {
 
     protected BubbleDataProvider mChart;
+
+    //shapeHalf is the variable used here for radius
+    private float shapeHalf;
+
+    public float getShapeHalf(){
+        return  shapeHalf;
+    }
+
+
 
     public BubbleChartRenderer(BubbleDataProvider chart, ChartAnimator animator,
                                ViewPortHandler viewPortHandler) {
@@ -102,6 +109,7 @@ public class BubbleChartRenderer extends DataRenderer {
             trans.pointValuesToPixel(pointBuffer);
 
             float shapeHalf = getShapeSize(entry.getSize(), dataSet.getMaxSize(), referenceSize, normalizeSize) / 2f;
+            this.shapeHalf = shapeHalf;
 
             if (!mViewPortHandler.isInBoundsTop(pointBuffer[1] + shapeHalf)
                     || !mViewPortHandler.isInBoundsBottom(pointBuffer[1] - shapeHalf))
@@ -115,8 +123,12 @@ public class BubbleChartRenderer extends DataRenderer {
 
             final int color = dataSet.getColor(entry.getXIndex());
 
+
+
             mRenderPaint.setColor(color);
             c.drawCircle(pointBuffer[0], pointBuffer[1], shapeHalf, mRenderPaint);
+
+            //here shapeHalf is the radius
         }
     }
 
@@ -180,7 +192,7 @@ public class BubbleChartRenderer extends DataRenderer {
                    /* drawValue(c, dataSet.getValueFormatter(), entry.getSize(), entry, i, x,
                             y + (0.5f * lineHeight), valueTextColor);
 */
-                    drawValueWithTitle(c, dataSet.getValueFormatter(), entry.getSize(), entry, i, x,
+                    drawValueForBubble(c, dataSet.getValueFormatter(),getShapeHalf(), entry.getSize(), entry, i, x,
                             y + (0.5f * lineHeight), valueTextColor);
 
 
@@ -251,7 +263,7 @@ public class BubbleChartRenderer extends DataRenderer {
                 pointBuffer[1] = (float) (entry.getVal()) * phaseY;
                 trans.pointValuesToPixel(pointBuffer);
 
-                float shapeHalf = getShapeSize(entry.getSize(),
+                shapeHalf = getShapeSize(entry.getSize(),
                         dataSet.getMaxSize(),
                         referenceSize,
                         normalizeSize) / 2f;
